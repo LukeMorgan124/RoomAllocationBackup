@@ -9,8 +9,8 @@ namespace RoomAllocation3.Models
     {
 
         public int PeriodID { get; set; }
-        public string PeriodName{ get; set; }
+        public string PeriodTime{ get; set; }
 
-        //public ICollection<Period> Periods { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 }

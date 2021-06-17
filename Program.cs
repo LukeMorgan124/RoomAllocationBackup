@@ -32,7 +32,7 @@ namespace RoomAllocation3
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    // context.Database.EnsureCreated();
+                    context.Database.EnsureCreated();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

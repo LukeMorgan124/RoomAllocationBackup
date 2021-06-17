@@ -7,18 +7,19 @@ namespace RoomAllocation3.Models
 {
     public class Room
     {
-
+        
         public int RoomID { get; set; }
-        public int BlockID{ get; set; }
-        public string RoomNumber { get; set; }
+        public int BlockID { get; set; }
+        public int RoomNumber { get; set; }
 
-
-        public Room(string roomNumber)
+        public Room(int blockID, int roomNumber) 
         {
-            RoomNumber = roomNumber;
-            
+            BlockID = blockID;
+            RoomNumber = roomNumber; 
         }
 
-        public ICollection<Room> Rooms { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
+        public Block Blocks { get; set; }
+
     }
 }

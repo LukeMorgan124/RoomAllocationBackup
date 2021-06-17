@@ -11,6 +11,6 @@ namespace RoomAllocation3.Models
         public int BlockID { get; set; }
         public string BlockName { get; set; }
         
-        public ICollection<Block> Blocks { get; set; }
+        public ICollection<Room> Rooms { get; set; }
     }
 }

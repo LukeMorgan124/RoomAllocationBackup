@@ -3,20 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RoomAllocation3.Data;
 
 namespace RoomAllocation3.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210613212849_migration 2")]
+    partial class migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -226,10 +228,15 @@ namespace RoomAllocation3.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BlockID1")
+                        .HasColumnType("int");
+
                     b.Property<string>("BlockName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BlockID");
+
+                    b.HasIndex("BlockID1");
 
                     b.ToTable("Blocks");
                 });
@@ -241,10 +248,13 @@ namespace RoomAllocation3.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BookingID1")
+                        .HasColumnType("int");
+
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
 
-                    b.Property<int>("DayOfTheWeekID")
+                    b.Property<int>("DayOfWeekID")
                         .HasColumnType("int");
 
                     b.Property<int>("PeriodID")
@@ -253,18 +263,12 @@ namespace RoomAllocation3.Data.Migrations
                     b.Property<int>("RoomID")
                         .HasColumnType("int");
 
-                    b.Property<string>("TeacherCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TeacherID")
+                        .HasColumnType("int");
 
                     b.HasKey("BookingID");
 
-                    b.HasIndex("CourseID");
-
-                    b.HasIndex("DayOfTheWeekID");
-
-                    b.HasIndex("PeriodID");
-
-                    b.HasIndex("RoomID");
+                    b.HasIndex("BookingID1");
 
                     b.ToTable("Bookings");
                 });
@@ -306,7 +310,7 @@ namespace RoomAllocation3.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("PeriodTime")
+                    b.Property<string>("PeriodName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PeriodID");
@@ -324,12 +328,15 @@ namespace RoomAllocation3.Data.Migrations
                     b.Property<int>("BlockID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RoomID1")
+                        .HasColumnType("int");
+
                     b.Property<string>("RoomNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoomID");
 
-                    b.HasIndex("BlockID");
+                    b.HasIndex("RoomID1");
 
                     b.ToTable("Rooms");
                 });
@@ -385,75 +392,40 @@ namespace RoomAllocation3.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RoomAllocation3.Models.Block", b =>
+                {
+                    b.HasOne("RoomAllocation3.Models.Block", null)
+                        .WithMany("Blocks")
+                        .HasForeignKey("BlockID1");
+                });
+
             modelBuilder.Entity("RoomAllocation3.Models.Booking", b =>
                 {
-                    b.HasOne("RoomAllocation3.Models.Course", "Courses")
+                    b.HasOne("RoomAllocation3.Models.Booking", null)
                         .WithMany("Bookings")
-                        .HasForeignKey("CourseID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RoomAllocation3.Models.DayOfTheWeek", "DayOfTheWeek")
-                        .WithMany("Bookings")
-                        .HasForeignKey("DayOfTheWeekID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RoomAllocation3.Models.Period", "Period")
-                        .WithMany("Bookings")
-                        .HasForeignKey("PeriodID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RoomAllocation3.Models.Room", "Rooms")
-                        .WithMany("Bookings")
-                        .HasForeignKey("RoomID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Courses");
-
-                    b.Navigation("DayOfTheWeek");
-
-                    b.Navigation("Period");
-
-                    b.Navigation("Rooms");
+                        .HasForeignKey("BookingID1");
                 });
 
             modelBuilder.Entity("RoomAllocation3.Models.Room", b =>
                 {
-                    b.HasOne("RoomAllocation3.Models.Block", "Blocks")
+                    b.HasOne("RoomAllocation3.Models.Room", null)
                         .WithMany("Rooms")
-                        .HasForeignKey("BlockID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blocks");
+                        .HasForeignKey("RoomID1");
                 });
 
             modelBuilder.Entity("RoomAllocation3.Models.Block", b =>
                 {
-                    b.Navigation("Rooms");
+                    b.Navigation("Blocks");
                 });
 
-            modelBuilder.Entity("RoomAllocation3.Models.Course", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("RoomAllocation3.Models.DayOfTheWeek", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("RoomAllocation3.Models.Period", b =>
+            modelBuilder.Entity("RoomAllocation3.Models.Booking", b =>
                 {
                     b.Navigation("Bookings");
                 });
 
             modelBuilder.Entity("RoomAllocation3.Models.Room", b =>
                 {
-                    b.Navigation("Bookings");
+                    b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
         }

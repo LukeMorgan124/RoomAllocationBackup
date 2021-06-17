@@ -10,25 +10,14 @@ namespace RoomAllocation3.Data
     {
         public static void Initialize(ApplicationDbContext context)
         {
-            //context.Database.EnsureCreated();
+            context.Database.EnsureCreated();
             
 
             // Look for any courses.
             if (context.Courses.Any())
             {
                 return;   // DB has been seeded
-            }
-
-            //var users = new User[]
-            //{
-            //    new User {Username = "ac107242", Password = "123", Admin = true}
- 
-            //};
-
-            //context.Users.AddRange(users);
-            //context.SaveChanges();
-
-            
+            }   
 
             var daysOfTheWeek = new DayOfTheWeek[]
             {
@@ -43,11 +32,11 @@ namespace RoomAllocation3.Data
 
             var periods = new Period[]
             {
-                new Period { PeriodName = "09:15 - 10:10" },
-                new Period { PeriodName = "10:15 - 11:10" },
-                new Period { PeriodName = "11:35 - 12:30" },
-                new Period { PeriodName = "13:20 - 14:14" },
-                new Period { PeriodName = "14:20 - 15:15" },
+                new Period { PeriodTime = "09:15 - 10:10" },
+                new Period { PeriodTime = "10:15 - 11:10" },
+                new Period { PeriodTime = "11:35 - 12:30" },
+                new Period { PeriodTime = "13:20 - 14:10" },
+                new Period { PeriodTime = "14:20 - 15:15" },
             };
             context.Periods.AddRange(periods);
             context.SaveChanges();
@@ -64,7 +53,7 @@ namespace RoomAllocation3.Data
             context.SaveChanges();
 
             var blocks = new Block[]
-           {
+            {
                 new Block { BlockName = "A" },
                 new Block { BlockName = "B" },
                 new Block { BlockName = "C" },
@@ -73,16 +62,16 @@ namespace RoomAllocation3.Data
                 new Block { BlockName = "F" },
 
 
-           };
+            };
             context.Blocks.AddRange(blocks);
             context.SaveChanges();
 
-            List<Room> rooms = new List<Room>();
-            foreach (Block b in blocks)
-            {
-                for (int loop = 1; loop <= 10; loop++)
+            List<Room> rooms = new List<Room>();     
+            for (int CurrentBlock = 1; CurrentBlock <= blocks.Length; CurrentBlock++)
+            {         
+                for (int CurrentRoomNumber = 1; CurrentRoomNumber <= 10; CurrentRoomNumber++)
                 {
-                rooms.Add(new Room(b.BlockName + loop.ToString("00")));
+                    rooms.Add(new Room (CurrentBlock, CurrentRoomNumber));
                 }
             }
             context.Rooms.AddRange(rooms);
@@ -90,7 +79,7 @@ namespace RoomAllocation3.Data
 
             var bookings = new Booking[]
             {
-                new Booking { CourseID = 1, RoomID = 1, DayOfWeekID = 1, PeriodID = 1, TeacherID = 1 }
+                new Booking { CourseID = 1, RoomID = 1, DayOfTheWeekID = 1, PeriodID = 1, TeacherCode = "FRA"}
                 
             };
             context.Bookings.AddRange(bookings);

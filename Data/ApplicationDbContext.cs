@@ -31,8 +31,6 @@ namespace RoomAllocation3.Data
             modelBuilder.Entity<Block>().ToTable("Blocks");
             modelBuilder.Entity<Room>().ToTable("Rooms");
             modelBuilder.Entity<Booking>().ToTable("Bookings");
-            //modelBuilder.Entity<Room>().ToTable("Room");
-            //modelBuilder.Entity<ListRoom>().ToTable("ListRoom");
         }
     }
 }

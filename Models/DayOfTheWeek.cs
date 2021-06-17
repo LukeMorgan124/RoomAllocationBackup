@@ -11,6 +11,6 @@ namespace RoomAllocation3.Models
         public int DayOfTheWeekID { get; set; }
         public string DayOfTheWeekName{ get; set; }
                 
-        //public ICollection<DayOfTheWeek> DaysOfTheWeek { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 }

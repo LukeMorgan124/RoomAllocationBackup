@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RoomAllocation3.Data;
 
 namespace RoomAllocation3.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210616012644_migraion 4")]
+    partial class migraion4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -422,13 +424,11 @@ namespace RoomAllocation3.Data.Migrations
 
             modelBuilder.Entity("RoomAllocation3.Models.Room", b =>
                 {
-                    b.HasOne("RoomAllocation3.Models.Block", "Blocks")
+                    b.HasOne("RoomAllocation3.Models.Block", null)
                         .WithMany("Rooms")
                         .HasForeignKey("BlockID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Blocks");
                 });
 
             modelBuilder.Entity("RoomAllocation3.Models.Block", b =>

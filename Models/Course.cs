@@ -10,8 +10,7 @@ namespace RoomAllocation3.Models
 
         public int CourseID { get; set; }
         public string CourseCode{ get; set; }
-        
-        
-        //public ICollection<ListRoom> ListRooms { get; set; }
+
+        public ICollection<Booking> Bookings { get; set; }
     }
 }
