@@ -19,7 +19,7 @@ namespace RoomAllocation3.Models
         }
 
         public ICollection<Booking> Bookings { get; set; }
-        public Block Blocks { get; set; }
+        public Block Block { get; set; }
 
     }
 }

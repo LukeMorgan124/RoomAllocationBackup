@@ -35,6 +35,7 @@ namespace RoomAllocation3.Pages.Rooms
                 .ThenInclude(r => r.DayOfTheWeek)
                 .Include(r => r.Bookings)
                 .ThenInclude(r => r.Period)
+                .Include(r => r.Block)
 
                 .FirstOrDefaultAsync(m => m.RoomID == id);
 

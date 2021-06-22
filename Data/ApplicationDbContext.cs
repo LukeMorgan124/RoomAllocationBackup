@@ -25,12 +25,12 @@ namespace RoomAllocation3.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Course>().ToTable("Courses");
+            modelBuilder.Entity<Course>().ToTable("Course");
             modelBuilder.Entity<DayOfTheWeek>().ToTable("DayOfTheWeek");
-            modelBuilder.Entity<Period>().ToTable("Periods");
-            modelBuilder.Entity<Block>().ToTable("Blocks");
-            modelBuilder.Entity<Room>().ToTable("Rooms");
-            modelBuilder.Entity<Booking>().ToTable("Bookings");
+            modelBuilder.Entity<Period>().ToTable("Period");
+            modelBuilder.Entity<Block>().ToTable("Block");
+            modelBuilder.Entity<Room>().ToTable("Room");
+            modelBuilder.Entity<Booking>().ToTable("Booking");
         }
     }
 }

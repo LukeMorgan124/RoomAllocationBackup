@@ -11,29 +11,63 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Room[0].RoomNumber)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.BlockSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    Block
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.RoomNumberSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    Room Number
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Room) {
-        <tr>
-             
-            <td>
-                @Html.DisplayFor(model => model.Room[0].Blocks.BlockName)
-                @Html.DisplayFor(modelItem => item.RoomNumber)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.RoomID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RoomID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RoomID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Rooms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Block.BlockName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Room.RoomID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Room.RoomID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Room.RoomID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@{
+    var prevDisabled = !Model.Rooms.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Rooms.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Rooms.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Rooms.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
