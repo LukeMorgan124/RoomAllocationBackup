@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using RoomAllocation3.Models;
 
 namespace RoomAllocation3.Pages.Rooms
 {
+    [Authorize]
     public class DetailsModel : PageModel
     {
         private readonly RoomAllocation3.Data.ApplicationDbContext _context;

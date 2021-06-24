@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using RoomAllocation3.Data;
 using RoomAllocation3.Models;
 
-namespace RoomAllocation3.Pages.Rooms
+namespace RoomAllocation3.Pages.Bookings
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace RoomAllocation3.Pages.Rooms
         }
 
         [BindProperty]
-        public Room Room { get; set; }
+        public Booking Booking { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +30,20 @@ namespace RoomAllocation3.Pages.Rooms
                 return NotFound();
             }
 
-            Room = await _context.Rooms.FirstOrDefaultAsync(m => m.RoomID == id);
+            Booking = await _context.Bookings
+                .Include(b => b.Courses)
+                .Include(b => b.DaysOfTheWeek)
+                .Include(b => b.Period)
+                .Include(b => b.Rooms).FirstOrDefaultAsync(m => m.BookingID == id);
 
-            if (Room == null)
+            if (Booking == null)
             {
                 return NotFound();
             }
+           ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID");
+           ViewData["DayOfTheWeekID"] = new SelectList(_context.DaysOfTheWeek, "DayOfTheWeekID", "DayOfTheWeekID");
+           ViewData["PeriodID"] = new SelectList(_context.Periods, "PeriodID", "PeriodID");
+           ViewData["RoomID"] = new SelectList(_context.Rooms, "RoomID", "RoomID");
             return Page();
         }
 
@@ -48,7 +56,7 @@ namespace RoomAllocation3.Pages.Rooms
                 return Page();
             }
 
-            _context.Attach(Room).State = EntityState.Modified;
+            _context.Attach(Booking).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +64,7 @@ namespace RoomAllocation3.Pages.Rooms
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExists(Room.RoomID))
+                if (!BookingExists(Booking.BookingID))
                 {
                     return NotFound();
                 }
@@ -69,9 +77,9 @@ namespace RoomAllocation3.Pages.Rooms
             return RedirectToPage("./Index");
         }
 
-        private bool RoomExists(int id)
+        private bool BookingExists(int id)
         {
-            return _context.Rooms.Any(e => e.RoomID == id);
+            return _context.Bookings.Any(e => e.BookingID == id);
         }
     }
 }

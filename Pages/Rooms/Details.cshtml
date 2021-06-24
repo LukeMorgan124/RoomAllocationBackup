@@ -38,25 +38,28 @@
                 </tr>
                 @foreach (var item in Model.Room.Bookings)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DaysOfTheWeek.DayOfTheWeekName)
-                        </td>
-                        <td>
-                            Period
-                            @Html.DisplayFor(modelItem => item.Period.PeriodID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Courses.YearLevel)
-                            @Html.DisplayFor(modelItem => item.Courses.CourseCode)
-                        </td>
-                         <td>
-                            @Html.DisplayFor(modelItem => item.Courses.TeacherCode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Period.PeriodTime)
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DaysOfTheWeek.DayOfTheWeekName)
+                </td>
+                <td>
+                    Period
+                    @Html.DisplayFor(modelItem => item.Period.PeriodID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Courses.YearLevel)
+                    @Html.DisplayFor(modelItem => item.Courses.CourseCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Courses.TeacherCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Period.PeriodTime)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.BookingID">Book Room</a>
+                </td>
+            </tr>
                 }
             </table>
         </dd>

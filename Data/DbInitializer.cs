@@ -42,9 +42,9 @@ namespace RoomAllocation3.Data
             context.SaveChanges();
 
 
-            List<String> TeacherCodes = new List<String>() { "KHO", "PHS", "FRA", "LIS", "SVH", "CLK" };
+            List<String> TeacherCodes = new List<String>() {"BID", "ROA", "TRC", "PNR", "TBU", "LKT", "YER", "TUV", "KHT", "REY", "NHT", "URE", "HNP", "DRE", "HWC", "JUT", "GRE", "KUT", "STR", "VAK", "KRY", "GHO", "IGP", "UYC", "FER", "JOH", "VIK", "OPT", "CYI", "RDY", "SER", "OHI", "YUI", "TXR", "MBO", "PTO", "CGO", "OHR", "JOX", "RYP", "BKH", "FOM", "HEA", "BTR", "N/A" };
 
-            List<String> Classes = new List<String>() { "PHY", "SOS", "MAT"};
+            List<String> Classes = new List<String>() { "PHY", "SOS", "MAT", "ENG", "SCI", "MUS", "DRA", "ART", "TPI", "TVC", "TPD", "BIO", "CEM", "HIS", "GEO", "PSY", "STA", "HPE", "FRE", "SPA", "JAP", "SAO", "Empty"};
 
 
             List<Course> courses = new List<Course>();
@@ -58,7 +58,15 @@ namespace RoomAllocation3.Data
                         {
                             string CurrentTeacherString = TeacherCodes[CurrentTeacher - 1];
                             string CurrentClassString = Classes[CurrentClass - 1];
-                            courses.Add(new Course(CurrentClassString, CurrentTeacherString, CurrentYearLevel));
+                            if (CurrentClassString == "Empty")
+                            {
+                                int EmptyYearLevel = 0;
+                                courses.Add(new Course(CurrentClassString, CurrentTeacherString, EmptyYearLevel));
+                            }
+                            else
+                            {
+                                courses.Add(new Course(CurrentClassString, CurrentTeacherString, CurrentYearLevel));
+                            }
                         }
                     }
                 }
@@ -100,8 +108,17 @@ namespace RoomAllocation3.Data
                     for (int CurrentPeriod = 1; CurrentPeriod <= periods.Length; CurrentPeriod++)
                     {
                         Random rd = new Random();
-                        int RandomCourse = rd.Next(1, courses.Count);
-                        bookings.Add(new Booking(RandomCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod));
+                        int Empty = rd.Next(1, 3);
+                        if (Empty == 3)
+                        {
+                            int RandomCourse = courses.Count;
+                            bookings.Add(new Booking(RandomCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod));
+                        }
+                        else
+                        {
+                            int RandomCourse = rd.Next(1, (courses.Count - 1));
+                            bookings.Add(new Booking(RandomCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod));
+                        }
                     }
                 }
             }           
