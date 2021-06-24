@@ -11,13 +11,13 @@ namespace RoomAllocation3.Data
         public static void Initialize(ApplicationDbContext context)
         {
             context.Database.EnsureCreated();
-            
+
 
             // Look for any courses.
             if (context.Courses.Any())
             {
                 return;   // DB has been seeded
-            }   
+            }
 
             var daysOfTheWeek = new DayOfTheWeek[]
             {
@@ -41,14 +41,28 @@ namespace RoomAllocation3.Data
             context.Periods.AddRange(periods);
             context.SaveChanges();
 
-            var courses = new Course[]
-           {
-                new Course { CourseCode = "12MAT" },
-                new Course { CourseCode = "12SCI" },
-                new Course { CourseCode = "12ENG" },
-                new Course { CourseCode = "12PHY" },
 
-           };
+            List<String> TeacherCodes = new List<String>() { "KHO", "PHS", "FRA", "LIS", "SVH", "CLK" };
+
+            List<String> Classes = new List<String>() { "PHY", "SOS", "MAT"};
+
+
+            List<Course> courses = new List<Course>();
+            {
+                for (int CurrentYearLevel = 9; CurrentYearLevel <= 13; CurrentYearLevel++)
+                {
+                    for (int CurrentTeacher = 1; CurrentTeacher <= TeacherCodes.Count; CurrentTeacher++)
+                    {
+                        int OddCheck = (CurrentTeacher % 2);
+                        for (int CurrentClass = ((CurrentTeacher + OddCheck) / 2); CurrentClass <= 2; CurrentClass++)
+                        {
+                            string CurrentTeacherString = TeacherCodes[CurrentTeacher - 1];
+                            string CurrentClassString = Classes[CurrentClass - 1];
+                            courses.Add(new Course(CurrentClassString, CurrentTeacherString, CurrentYearLevel));
+                        }
+                    }
+                }
+            }
             context.Courses.AddRange(courses);
             context.SaveChanges();
 
@@ -66,22 +80,31 @@ namespace RoomAllocation3.Data
             context.Blocks.AddRange(blocks);
             context.SaveChanges();
 
-            List<Room> rooms = new List<Room>();     
+            List<Room> rooms = new List<Room>();
             for (int CurrentBlock = 1; CurrentBlock <= blocks.Length; CurrentBlock++)
-            {         
+            {
                 for (int CurrentRoomNumber = 1; CurrentRoomNumber <= 10; CurrentRoomNumber++)
                 {
-                    rooms.Add(new Room (CurrentBlock, CurrentRoomNumber));
+                    rooms.Add(new Room(CurrentBlock, CurrentRoomNumber));
                 }
             }
             context.Rooms.AddRange(rooms);
             context.SaveChanges();
 
-            var bookings = new Booking[]
+
+            List<Booking> bookings = new List<Booking>();
+            for (int CurrentRoomNumber = 1; CurrentRoomNumber <= rooms.Count; CurrentRoomNumber++)
             {
-                new Booking { CourseID = 1, RoomID = 1, DayOfTheWeekID = 1, PeriodID = 1, TeacherCode = "FRA"}
-                
-            };
+                for (int CurrentDay = 1; CurrentDay <= daysOfTheWeek.Length; CurrentDay++)
+                {
+                    for (int CurrentPeriod = 1; CurrentPeriod <= periods.Length; CurrentPeriod++)
+                    {
+                        Random rd = new Random();
+                        int RandomCourse = rd.Next(1, courses.Count);
+                        bookings.Add(new Booking(RandomCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod));
+                    }
+                }
+            }           
             context.Bookings.AddRange(bookings);
             context.SaveChanges();
 

@@ -30,13 +30,13 @@ namespace RoomAllocation3.Pages.Rooms
 
             Room = await _context.Rooms
                 .Include(r => r.Bookings)
-                .ThenInclude(r => r.Courses)
+                .ThenInclude(b => b.Courses)
                 .Include(r => r.Bookings)
-                .ThenInclude(r => r.DayOfTheWeek)
+                .ThenInclude(r => r.DaysOfTheWeek)
                 .Include(r => r.Bookings)
                 .ThenInclude(r => r.Period)
-                .Include(r => r.Block)
-
+                .Include(r => r.Block)          
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.RoomID == id);
 
             if (Room == null)
