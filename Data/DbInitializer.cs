@@ -54,7 +54,7 @@ namespace RoomAllocation3.Data
                     for (int CurrentTeacher = 1; CurrentTeacher <= TeacherCodes.Count; CurrentTeacher++)
                     {
                         int OddCheck = (CurrentTeacher % 2);
-                        for (int CurrentClass = ((CurrentTeacher + OddCheck) / 2); CurrentClass <= 2; CurrentClass++)
+                        for (int CurrentClass = ((CurrentTeacher + OddCheck) / 2); CurrentClass <= ((CurrentTeacher + OddCheck) / 2); CurrentClass++)
                         {
                             string CurrentTeacherString = TeacherCodes[CurrentTeacher - 1];
                             string CurrentClassString = Classes[CurrentClass - 1];
