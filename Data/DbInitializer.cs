@@ -120,8 +120,9 @@ namespace RoomAllocation3.Data
                         }
                         else
                         {
-                            int RandomCourse = rd.Next(1, courses.Count);
                             int RandomTeacher = rd.Next(1, teachers.Count);
+                            int OddCheck = (RandomTeacher % 2);
+                            int RandomCourse = ((RandomTeacher + OddCheck) / 2);
                             bookings.Add(new Booking(RandomCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod, RandomTeacher));
                         }
                     }
