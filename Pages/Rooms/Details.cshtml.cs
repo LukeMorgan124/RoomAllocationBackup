@@ -37,6 +37,8 @@ namespace RoomAllocation3.Pages.Rooms
                 .ThenInclude(r => r.DaysOfTheWeek)
                 .Include(r => r.Bookings)
                 .ThenInclude(r => r.Period)
+                .Include(r => r.Bookings)
+                .ThenInclude(r => r.Teacher)
                 .Include(r => r.Block)          
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.RoomID == id);

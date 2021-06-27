@@ -13,13 +13,15 @@ namespace RoomAllocation3.Models
         public int RoomID { get; set; }
         public int DayOfTheWeekID { get; set; }
         public int PeriodID { get; set; }
+        public int TeacherID { get; set; }
 
-        public Booking(int courseID, int roomID, int dayOfTheWeekID, int periodID)
+        public Booking(int courseID, int roomID, int dayOfTheWeekID, int periodID, int teacherID)
         {
             CourseID = courseID;
             RoomID = roomID;
             DayOfTheWeekID = dayOfTheWeekID;
             PeriodID = periodID;
+            TeacherID = teacherID;
         }
 
 
