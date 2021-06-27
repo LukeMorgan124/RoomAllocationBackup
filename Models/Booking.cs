@@ -27,6 +27,7 @@ namespace RoomAllocation3.Models
         public Room Rooms { get; set; }
         public DayOfTheWeek DaysOfTheWeek { get; set;}
         public Period Period { get; set; }
+        public Teacher Teacher { get; set; }
 
     }
 }

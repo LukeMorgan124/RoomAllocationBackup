@@ -20,6 +20,7 @@ namespace RoomAllocation3.Data
         public DbSet<Block> Blocks { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +32,7 @@ namespace RoomAllocation3.Data
             modelBuilder.Entity<Block>().ToTable("Block");
             modelBuilder.Entity<Room>().ToTable("Room");
             modelBuilder.Entity<Booking>().ToTable("Booking");
+            modelBuilder.Entity<Teacher>().ToTable("Teacher");
         }
     }
 }
