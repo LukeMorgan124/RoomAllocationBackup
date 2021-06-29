@@ -2,7 +2,7 @@
 
 namespace RoomAllocation3.Data.Migrations
 {
-    public partial class ihatemigrations : Migration
+    public partial class migration3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

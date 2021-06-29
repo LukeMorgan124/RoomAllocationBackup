@@ -38,10 +38,16 @@ namespace RoomAllocation3.Pages.Bookings
                 .Include(b => b.Period)
                 .Include(b => b.Rooms).FirstOrDefaultAsync(m => m.BookingID == id);
 
+            if (Booking.Booked == true)
+            {
+                return RedirectToPage("/RoomBooked");
+            }
+
             if (Booking == null)
             {
                 return NotFound();
             }
+    
            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID");
            ViewData["DayOfTheWeekID"] = new SelectList(_context.DaysOfTheWeek, "DayOfTheWeekID", "DayOfTheWeekID");
            ViewData["PeriodID"] = new SelectList(_context.Periods, "PeriodID", "PeriodID");

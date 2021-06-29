@@ -11,7 +11,7 @@ namespace RoomAllocation3.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20210615030902_i hate migrations")]
-    partial class ihatemigrations
+    partial class migration3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
