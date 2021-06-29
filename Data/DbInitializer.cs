@@ -116,14 +116,16 @@ namespace RoomAllocation3.Data
                         {
                             int EmptyCourse = courses.Count;
                             int EmptyTeacher = 1;
-                            bookings.Add(new Booking(EmptyCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod, EmptyTeacher));
+                            bool Booked = false;
+                            bookings.Add(new Booking(EmptyCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod, EmptyTeacher, Booked));
                         }
                         else
                         {
                             int RandomTeacher = rd.Next(1, teachers.Count);
                             int OddCheck = (RandomTeacher % 2);
                             int RandomCourse = ((RandomTeacher + OddCheck) / 2);
-                            bookings.Add(new Booking(RandomCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod, RandomTeacher));
+                            bool Booked = true;
+                            bookings.Add(new Booking(RandomCourse, CurrentRoomNumber, CurrentDay, CurrentPeriod, RandomTeacher, Booked));
                         }
                     }
                 }
