@@ -36,7 +36,8 @@ namespace RoomAllocation3.Pages.Bookings
                 .Include(b => b.Courses)
                 .Include(b => b.DaysOfTheWeek)
                 .Include(b => b.Period)
-                .Include(b => b.Rooms).FirstOrDefaultAsync(m => m.BookingID == id);
+                .Include(b => b.Rooms)
+                .Include(b => b.Teacher).FirstOrDefaultAsync(m => m.BookingID == id);
 
             if (Booking.Booked == true)
             {
@@ -48,15 +49,14 @@ namespace RoomAllocation3.Pages.Bookings
                 return NotFound();
             }
     
-           ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID");
+           /*ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID");
            ViewData["DayOfTheWeekID"] = new SelectList(_context.DaysOfTheWeek, "DayOfTheWeekID", "DayOfTheWeekID");
            ViewData["PeriodID"] = new SelectList(_context.Periods, "PeriodID", "PeriodID");
            ViewData["RoomID"] = new SelectList(_context.Rooms, "RoomID", "RoomID");
+           ViewData["TeacherID"] = new SelectList(_context.Teachers, "TeacherID", "TeacherID");*/
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

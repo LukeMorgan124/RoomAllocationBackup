@@ -16,24 +16,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Booking.BookingID" />
             <div class="form-group">
-                <label asp-for="Booking.CourseID" class="control-label"></label>
-                <select asp-for="Booking.Courses.CourseCode" class="form-control" asp-items="ViewBag.CourseID"></select>
-                <span asp-validation-for="Booking.CourseID" class="text-danger"></span>
+                <label asp-for="Booking.Courses.CourseCode" class="control-label">Course Code</label>
+                <input asp-for="Booking.Courses.CourseCode" class="form-control" />
+                <span asp-validation-for="Booking.Courses.CourseCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.RoomID" class="control-label"></label>
-                <select asp-for="Booking.RoomID" class="form-control" asp-items="ViewBag.RoomID"></select>
-                <span asp-validation-for="Booking.RoomID" class="text-danger"></span>
+                <label asp-for="Booking.Courses.YearLevel" class="control-label">Year Level</label>
+                <input asp-for="Booking.Courses.YearLevel" class="form-control" />
+                <span asp-validation-for="Booking.Courses.YearLevel" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.DayOfTheWeekID" class="control-label"></label>
-                <select asp-for="Booking.DayOfTheWeekID" class="form-control" asp-items="ViewBag.DayOfTheWeekID"></select>
-                <span asp-validation-for="Booking.DayOfTheWeekID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Booking.PeriodID" class="control-label"></label>
-                <select asp-for="Booking.PeriodID" class="form-control" asp-items="ViewBag.PeriodID"></select>
-                <span asp-validation-for="Booking.PeriodID" class="text-danger"></span>
+                <label asp-for="Booking.Teacher.TeacherCode" class="control-label">Teacher Code</label>
+                <input asp-for="Booking.Teacher.TeacherCode" class="form-control" />
+                <span asp-validation-for="Booking.Teacher.TeacherCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

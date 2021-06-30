@@ -41,7 +41,7 @@ namespace RoomAllocation3.Data
             context.Periods.AddRange(periods);
             context.SaveChanges();
 
-            List<String> Classes = new List<String>() { "PHY", "SOS", "MAT", "ENG", "SCI", "MUS", "DRA", "ART", "TPI", "TVC", "TPD", "BIO", "CEM", "HIS", "GEO", "PSY", "STA", "HPE", "FRE", "SPA", "JAP", "SAO", "Empty"};
+            List<String> Classes = new List<String>() { "PHY", "SOS", "MAT", "ENG", "SCI", "MUS", "DRA", "ART", "TPI", "TVC", "TPD", "BIO", "CEM", "HIS", "GEO", "PSY", "STA", "HPE", "FRE", "SPA", "JAP", "SAO", "N/A"};
 
 
             List<Course> courses = new List<Course>();
@@ -51,7 +51,7 @@ namespace RoomAllocation3.Data
                         for (int CurrentClass = 1; CurrentClass <= Classes.Count; CurrentClass++)
                         {
                             string CurrentClassString = Classes[CurrentClass - 1];
-                            if (CurrentClassString == "Empty")
+                            if (CurrentClassString == "N/A")
                             {
                                 int EmptyYearLevel = 0;
                                 courses.Add(new Course(CurrentClassString, EmptyYearLevel));
