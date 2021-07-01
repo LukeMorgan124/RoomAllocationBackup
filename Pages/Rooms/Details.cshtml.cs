@@ -34,8 +34,6 @@ namespace RoomAllocation3.Pages.Rooms
                 .Include(r => r.Bookings)
                 .ThenInclude(b => b.Courses)
                 .Include(r => r.Bookings)
-                .ThenInclude(r => r.DaysOfTheWeek)
-                .Include(r => r.Bookings)
                 .ThenInclude(r => r.Period)
                 .Include(r => r.Bookings)
                 .ThenInclude(r => r.Teacher)

@@ -12,10 +12,14 @@ namespace RoomAllocation3.Models
         public string CourseCode{ get; set; }
         public int YearLevel { get; set; }
 
+        
         public Course(string courseCode, int yearLevel)
         {
             CourseCode = courseCode;
             YearLevel = yearLevel;
+        }
+        public Course()
+        {
         }
 
         public ICollection<Booking> Bookings { get; set; }

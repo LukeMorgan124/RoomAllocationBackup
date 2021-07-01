@@ -34,10 +34,9 @@ namespace RoomAllocation3.Pages.Bookings
 
             Booking = await _context.Bookings
                 .Include(b => b.Courses)
-                .Include(b => b.DaysOfTheWeek)
-                .Include(b => b.Period)
-                .Include(b => b.Rooms)
-                .Include(b => b.Teacher).FirstOrDefaultAsync(m => m.BookingID == id);
+                .Include(b => b.Teacher)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.BookingID == id);
 
             if (Booking.Booked == true)
             {
@@ -49,11 +48,6 @@ namespace RoomAllocation3.Pages.Bookings
                 return NotFound();
             }
     
-           /*ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID");
-           ViewData["DayOfTheWeekID"] = new SelectList(_context.DaysOfTheWeek, "DayOfTheWeekID", "DayOfTheWeekID");
-           ViewData["PeriodID"] = new SelectList(_context.Periods, "PeriodID", "PeriodID");
-           ViewData["RoomID"] = new SelectList(_context.Rooms, "RoomID", "RoomID");
-           ViewData["TeacherID"] = new SelectList(_context.Teachers, "TeacherID", "TeacherID");*/
             return Page();
         }
 
@@ -89,5 +83,6 @@ namespace RoomAllocation3.Pages.Bookings
         {
             return _context.Bookings.Any(e => e.BookingID == id);
         }
+        
     }
 }

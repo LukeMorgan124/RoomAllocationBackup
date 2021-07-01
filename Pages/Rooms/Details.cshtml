@@ -31,7 +31,6 @@
                 </tr>
                 <tr>
                     <th>Day</th>
-                    <th>Period</th>
                     <th>Course</th>
                     <th>Teacher</th>
                     <th>Time</th>
@@ -40,11 +39,7 @@
                 {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DaysOfTheWeek.DayOfTheWeekName)
-                </td>
-                <td>
-                    Period
-                    @Html.DisplayFor(modelItem => item.Period.PeriodID)
+                    @Html.DisplayFor(modelItem => item.Day)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Courses.YearLevel)
@@ -54,7 +49,7 @@
                     @Html.DisplayFor(modelItem => item.Teacher.TeacherCode)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Period.PeriodTime)
+                    @Html.DisplayFor(modelItem => item.Period)
                 </td>
                 <td>
                     <a asp-page="/Bookings/Edit" asp-route-id="@item.BookingID">Book Room</a>
