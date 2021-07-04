@@ -34,13 +34,13 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Block.BlockName)
+                    @Html.DisplayFor(modelItem => item.Block)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+                    @Html.DisplayFor(modelItem => item.RoomNumber)
                 </td>
                 <td>
-                    <a asp-page="./Details" asp-route-id="@item.Room.RoomID">Bookings</a>
+                    <a asp-page="./Details" asp-route-id="@item.RoomID">Bookings</a>
                 </td>
             </tr>
         }

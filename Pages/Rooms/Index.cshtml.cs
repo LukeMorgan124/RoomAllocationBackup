@@ -28,12 +28,7 @@ namespace RoomAllocation3.Pages.Rooms
 
         public IList<Room> Room { get; set; }
 
-        public class RoomPlusBlock
-        {
-            public Room Room { get; set; }
-            public Block Block { get; set; }
-        }
-        public PaginatedList<RoomPlusBlock> Rooms { get; set; }
+        public PaginatedList<Room> Rooms { get; set; }
 
         public async Task OnGetAsync(string sortOrder, int? pageIndex)
         {
@@ -42,9 +37,8 @@ namespace RoomAllocation3.Pages.Rooms
             BlockSort = String.IsNullOrEmpty(sortOrder) ? "Block_desc" : "";
 
 
-            IQueryable<RoomPlusBlock> roomsIQ = from r in _context.Rooms
-                                                         join b in _context.Blocks on r.BlockID equals b.BlockID
-                                                         select new RoomPlusBlock() { Room = r, Block = b };
+            IQueryable<Room> roomsIQ = from r in _context.Rooms
+                                       select r;
 
 
 
@@ -52,21 +46,21 @@ namespace RoomAllocation3.Pages.Rooms
             switch (sortOrder)
             {
                 case "Rnumber":
-                    roomsIQ = roomsIQ.OrderBy(r => r.Room.RoomNumber);
+                    roomsIQ = roomsIQ.OrderBy(r => r.RoomNumber);
                     break;
                 case "Rnumber_desc":
-                    roomsIQ = roomsIQ.OrderByDescending(r => r.Room.RoomNumber);
+                    roomsIQ = roomsIQ.OrderByDescending(r => r.RoomNumber);
                     break;
                 case "Block_desc":
-                    roomsIQ = roomsIQ.OrderByDescending(r => r.Block.BlockName);
+                    roomsIQ = roomsIQ.OrderByDescending(r => r.Block);
                     break;
                 default:
-                    roomsIQ = roomsIQ.OrderBy(r => r.Block.BlockName);
+                    roomsIQ = roomsIQ.OrderBy(r => r.Block);
                     break;
             }
 
             int pageSize = 10;
-            Rooms = await PaginatedList<RoomPlusBlock>.CreateAsync(
+            Rooms = await PaginatedList<Room>.CreateAsync(
                 roomsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }

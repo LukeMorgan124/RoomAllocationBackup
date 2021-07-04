@@ -9,17 +9,20 @@ namespace RoomAllocation3.Models
     {
         
         public int RoomID { get; set; }
-        public int BlockID { get; set; }
+        public char Block { get; set; }
         public int RoomNumber { get; set; }
 
-        public Room(int blockID, int roomNumber) 
+        public Room(char block, int roomNumber) 
         {
-            BlockID = blockID;
+            Block = block;
             RoomNumber = roomNumber; 
+        }
+        public Room()
+        {
+
         }
 
         public ICollection<Booking> Bookings { get; set; }
-        public Block Block { get; set; }
 
     }
 }

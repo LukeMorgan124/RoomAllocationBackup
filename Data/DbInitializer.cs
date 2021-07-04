@@ -44,24 +44,14 @@ namespace RoomAllocation3.Data
             context.Courses.AddRange(courses);
             context.SaveChanges();
 
-            var blocks = new Block[]
-            {
-                new Block { BlockName = "A" },
-                new Block { BlockName = "B" },
-                new Block { BlockName = "C" },
-                new Block { BlockName = "D" },
-                new Block { BlockName = "E" },
-                new Block { BlockName = "F" },
-            };
-            context.Blocks.AddRange(blocks);
-            context.SaveChanges();
-
+            List<char> Blocks = new List<char>() { 'A', 'B', 'C', 'D', 'E', 'F'};
             List<Room> rooms = new List<Room>();
-            for (int CurrentBlock = 1; CurrentBlock <= blocks.Length; CurrentBlock++)
+            for (int CurrentBlock = 1; CurrentBlock <= Blocks.Count; CurrentBlock++)
             {
                 for (int CurrentRoomNumber = 1; CurrentRoomNumber <= 10; CurrentRoomNumber++)
                 {
-                    rooms.Add(new Room(CurrentBlock, CurrentRoomNumber));
+                    char CurrentBlockChar = Blocks[CurrentBlock - 1];
+                    rooms.Add(new Room(CurrentBlockChar, CurrentRoomNumber));
                 }
             }
             context.Rooms.AddRange(rooms);

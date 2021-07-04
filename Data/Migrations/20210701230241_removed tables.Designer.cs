@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RoomAllocation3.Data;
 
 namespace RoomAllocation3.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210701230241_removed tables")]
+    partial class removedtables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,6 +221,21 @@ namespace RoomAllocation3.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("RoomAllocation3.Models.Block", b =>
+                {
+                    b.Property<int>("BlockID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BlockName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BlockID");
+
+                    b.ToTable("Block");
+                });
+
             modelBuilder.Entity("RoomAllocation3.Models.Booking", b =>
                 {
                     b.Property<int>("BookingID")
@@ -280,14 +297,15 @@ namespace RoomAllocation3.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Block")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                    b.Property<int>("BlockID")
+                        .HasColumnType("int");
 
                     b.Property<int>("RoomNumber")
                         .HasColumnType("int");
 
                     b.HasKey("RoomID");
+
+                    b.HasIndex("BlockID");
 
                     b.ToTable("Room");
                 });
@@ -383,6 +401,22 @@ namespace RoomAllocation3.Data.Migrations
                     b.Navigation("Rooms");
 
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("RoomAllocation3.Models.Room", b =>
+                {
+                    b.HasOne("RoomAllocation3.Models.Block", "Block")
+                        .WithMany("Rooms")
+                        .HasForeignKey("BlockID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Block");
+                });
+
+            modelBuilder.Entity("RoomAllocation3.Models.Block", b =>
+                {
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("RoomAllocation3.Models.Course", b =>

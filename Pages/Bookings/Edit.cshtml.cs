@@ -35,6 +35,7 @@ namespace RoomAllocation3.Pages.Bookings
             Booking = await _context.Bookings
                 .Include(b => b.Courses)
                 .Include(b => b.Teacher)
+                .Include(b => b.Rooms)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.BookingID == id);
 

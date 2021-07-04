@@ -15,7 +15,6 @@ namespace RoomAllocation3.Data
         }
 
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Block> Blocks { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
@@ -25,7 +24,6 @@ namespace RoomAllocation3.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Course>().ToTable("Course");
-            modelBuilder.Entity<Block>().ToTable("Block");
             modelBuilder.Entity<Room>().ToTable("Room");
             modelBuilder.Entity<Booking>().ToTable("Booking");
             modelBuilder.Entity<Teacher>().ToTable("Teacher");
