@@ -77,12 +77,12 @@ namespace RoomAllocation3.Pages.Bookings
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Rooms/Index");
         }
 
         private bool BookingExists(int id)
         {
-            return _context.Bookings.Any(e => e.BookingID == id);
+            return _context.Bookings.Any(b => b.BookingID == id);
         }
         
     }

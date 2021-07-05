@@ -45,10 +45,11 @@ namespace RoomAllocation3.Data
             context.SaveChanges();
 
             List<char> Blocks = new List<char>() { 'A', 'B', 'C', 'D', 'E', 'F'};
+            List<int> RoomsInBlock = new List<int>() { 46, 17, 29, 23, 16, 14};
             List<Room> rooms = new List<Room>();
             for (int CurrentBlock = 1; CurrentBlock <= Blocks.Count; CurrentBlock++)
             {
-                for (int CurrentRoomNumber = 1; CurrentRoomNumber <= 10; CurrentRoomNumber++)
+                for (int CurrentRoomNumber = 1; CurrentRoomNumber <= RoomsInBlock[CurrentBlock - 1]; CurrentRoomNumber++)
                 {
                     char CurrentBlockChar = Blocks[CurrentBlock - 1];
                     rooms.Add(new Room(CurrentBlockChar, CurrentRoomNumber));
@@ -71,6 +72,7 @@ namespace RoomAllocation3.Data
 
             List<String> DaysOfTheWeek = new List<String>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
             List<String> PeriodTimes = new List<String>() { "09:15 - 10:10", "10:15 - 11:10", "11:35 - 12:30", "13:20 - 14:15", "14:20 - 15:15"};
+            List<String> MondayPeriodTimes = new List<String>() { "09:10 - 10:00", "10:05 - 10:55", "11:10 - 12:45", "13:35 - 14:25", "14:40 - 15:20" };
             List<Booking> bookings = new List<Booking>();
             for (int CurrentRoomNumber = 1; CurrentRoomNumber <= rooms.Count; CurrentRoomNumber++)
             {
@@ -79,9 +81,18 @@ namespace RoomAllocation3.Data
                     string CurrentDayString = DaysOfTheWeek[CurrentDay - 1];
                     for (int CurrentPeriod = 1; CurrentPeriod <= PeriodTimes.Count; CurrentPeriod++)
                     {
-                        string CurrentPeriodString = PeriodTimes[CurrentPeriod - 1];
+                        string CurrentPeriodString;
                         Random rd = new Random();
-                        int Empty = rd.Next(1, 5);                     
+                        int Empty = rd.Next(1, 5);
+                        if (CurrentDayString == "Monday")
+                        {
+                            CurrentPeriodString = MondayPeriodTimes[CurrentPeriod - 1];
+                        }
+                        else
+                        {
+                            CurrentPeriodString = PeriodTimes[CurrentPeriod - 1];
+                        }
+                                            
                         if (Empty == 4)
                         {
                             int EmptyCourse = courses.Count;
