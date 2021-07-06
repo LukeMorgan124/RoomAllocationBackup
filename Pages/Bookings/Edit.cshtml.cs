@@ -138,7 +138,6 @@ namespace RoomAllocation3.Pages.Bookings
             {
                 return NotFound();
             }
-            PopulateCourseDropDownList(_context, Booking.CourseID);
             return Page();
         }
 
@@ -156,12 +155,11 @@ namespace RoomAllocation3.Pages.Bookings
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Booking>(BookingToUpdate, "Booking", b => b.CourseID, b => b.TeacherID))
+            if (await TryUpdateModelAsync<Booking>(BookingToUpdate, "booking", b => b.CourseID, b => b.TeacherID))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("/Rooms/Index");
             }
-            PopulateCourseDropDownList(_context, BookingToUpdate.CourseID);
             return Page();
         }
     }
