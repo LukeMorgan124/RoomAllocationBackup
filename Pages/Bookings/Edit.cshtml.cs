@@ -103,7 +103,7 @@ using RoomAllocation3.Models;
 namespace RoomAllocation3.Pages.Bookings
 {
     [Authorize]
-    public class EditModel : CourseNamePageModel
+    public class EditModel : PageModel
     {
         private readonly RoomAllocation3.Data.ApplicationDbContext _context;
 
