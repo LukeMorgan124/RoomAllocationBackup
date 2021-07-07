@@ -14,11 +14,6 @@ namespace RoomAllocation3.Models
 
         public string CourseYear { get; set; }
 
-        /*public string CourseYear
-        {
-            get { return YearLevel + CourseCode; }
-        }*/
-
         public Course(string courseCode, int yearLevel)
         {
             CourseCode = courseCode;

@@ -19,5 +19,16 @@ namespace RoomAllocation3.Pages.Bookings
             CourseNameSL = new SelectList(coursesQuery.AsNoTracking(),
                         "CourseID", "CourseYear", selectedCourse);
         }
+        public SelectList TeacherCodeSL { get; set; }
+
+        public void PopulateTeacherDropDownList(ApplicationDbContext _context, object selectedTeacher = null)
+        {
+            var teachersQuery = from t in _context.Teachers
+                               orderby t.TeacherCode
+                               select t;
+
+            TeacherCodeSL = new SelectList(teachersQuery.AsNoTracking(),
+                        "TeacherID", "TeacherCode", selectedTeacher);
+        }
     }
 }

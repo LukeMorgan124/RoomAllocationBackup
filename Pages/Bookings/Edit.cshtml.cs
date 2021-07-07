@@ -48,6 +48,7 @@ namespace RoomAllocation3.Pages.Bookings
                 return NotFound();
             }
             PopulateCourseDropDownList(_context, Booking.CourseID);
+            PopulateTeacherDropDownList(_context, Booking.TeacherID);
             return Page();
         }
 
@@ -71,6 +72,7 @@ namespace RoomAllocation3.Pages.Bookings
                 return RedirectToPage("/Rooms/Index");
             }
             PopulateCourseDropDownList(_context, BookingToUpdate.CourseID);
+            PopulateTeacherDropDownList(_context, BookingToUpdate.TeacherID);
             return Page();
         }
     }

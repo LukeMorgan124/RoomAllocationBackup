@@ -112,8 +112,7 @@ namespace RoomAllocation3.Data
                 }
             }           
             context.Bookings.AddRange(bookings);
-            context.SaveChanges();
-            
+            context.SaveChanges();       
         }
     }
 }
