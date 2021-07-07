@@ -11,7 +11,6 @@ using RoomAllocation3.Models;
 
 namespace RoomAllocation3.Pages.Rooms
 {
-    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly RoomAllocation3.Data.ApplicationDbContext _context;
