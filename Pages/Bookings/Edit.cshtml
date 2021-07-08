@@ -6,7 +6,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Book Room</h1>
 
 <h4>Booking</h4>
 <hr />
@@ -16,25 +16,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Booking.BookingID" />
 
-            <label asp-for="Booking.Courses" class="control-label"></label>
-            <select asp-for="Booking.CourseID" class="form-control"
-                    asp-items="@Model.CourseNameSL"></select>
-            <span asp-validation-for="Booking.CourseID" class="text-danger"></span>
-
-            <label asp-for="Booking.Teacher" class="control-label"></label>
-            <select asp-for="Booking.TeacherID" class="form-control"
-                    asp-items="@Model.TeacherCodeSL"></select>
-            <span asp-validation-for="Booking.TeacherID" class="text-danger"></span>
-
+            <div>
+                <label asp-for="Booking.Courses" class="control-label">Year Level and Course Code</label>
+                <select asp-for="Booking.CourseID" class="form-control"
+                        asp-items="@Model.CourseNameSL"></select>
+                <span asp-validation-for="Booking.CourseID" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Booking.Teacher" class="control-label">Teacher Code</label>
+                <select asp-for="Booking.TeacherID" class="form-control"
+                        asp-items="@Model.TeacherCodeSL"></select>
+                <span asp-validation-for="Booking.TeacherID" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Book" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="/Rooms/Index">Back to List</a>
+    <a asp-page="/Rooms/Index">Back to Rooms</a>
 </div>
 
 @section Scripts {
