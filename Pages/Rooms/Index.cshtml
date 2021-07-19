@@ -15,14 +15,12 @@
     <thead>
         <tr>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.BlockSort"
-                   asp-route-currentFilter="@Model.CurrentFilter">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.BlockSort">
                     Block
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.RoomNumberSort"
-                   asp-route-currentFilter="@Model.CurrentFilter">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.RoomNumberSort">
                     Room Number
                 </a>
             </th>
@@ -56,14 +54,12 @@
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Rooms.PageIndex - 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @prevDisabled">
     Previous
 </a>
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Rooms.PageIndex + 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @nextDisabled">
     Next
 </a>

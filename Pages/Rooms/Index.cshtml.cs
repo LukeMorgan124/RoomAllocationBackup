@@ -22,7 +22,6 @@ namespace RoomAllocation3.Pages.Rooms
 
         public string RoomNumberSort { get; set; }
         public string BlockSort { get; set; }
-        public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
         public IList<Room> Room { get; set; }
